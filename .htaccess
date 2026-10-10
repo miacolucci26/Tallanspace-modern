@@ -2,6 +2,11 @@
   RewriteEngine On
   RewriteBase /
 
+  # Link previews: /inteligencia-comercial?d=mango gets an SPA shell with its
+  # own Open Graph tags (same JS/CSS as index.html; the URL in the browser is unchanged).
+  RewriteCond %{QUERY_STRING} (^|&)d=mango(&|$) [NC]
+  RewriteRule ^inteligencia-comercial/?$ /og/inteligencia-comercial-mango.html [L]
+
   # Serve existing files and directories (assets, images, api/*.php) as-is.
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
