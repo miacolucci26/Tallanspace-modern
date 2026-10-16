@@ -15,6 +15,9 @@
   RewriteCond %{QUERY_STRING} (^|&)d=mango(&|$) [NC]
   RewriteRule ^inteligencia-comercial/?$ /og/inteligencia-comercial-mango.html [L]
 
+  RewriteCond %{QUERY_STRING} (^|&)d=banano(&|$) [NC]
+  RewriteRule ^inteligencia-comercial/?$ /og/inteligencia-comercial-banano.html [L]
+
   # Serve existing files and directories (assets, images, api/*.php) as-is.
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
