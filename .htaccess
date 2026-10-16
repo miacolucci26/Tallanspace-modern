@@ -1,6 +1,7 @@
 <IfModule mod_headers.c>
-  # Dashboards embebidos: el navegador siempre revalida (evita versiones viejas en celular).
-  <FilesMatch "^(banano|mango)\.html$">
+  # HTML (index.html, og/*, dashboards/*): el navegador siempre revalida, así el celular
+  # recibe los enlaces nuevos a los .js en lugar de una copia vieja guardada.
+  <FilesMatch "\.html$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
 </IfModule>
