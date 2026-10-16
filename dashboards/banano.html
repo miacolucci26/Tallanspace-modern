@@ -116,8 +116,7 @@ function pais(){const q=S.ps.toLowerCase(),m=agg(rows(),r=>r[6]);PR=[...m].map((
  $('pt').innerHTML=V.length?'<tr><th data-o="p">País de destino</th><th data-o="f">FOB, miles US$</th><th data-o="k">Peso neto, t</th><th data-o="v">Valor unitario, US$/kg</th></tr>'+V.map(r=>`<tr><td>${r.p}</td><td>${fm(r.f)}</td><td>${fm(r.k)}</td><td>${fm(r.v,2)}</td></tr>`).join(''):'<tr><td>Sin datos para esta selección</td></tr>';
  $('pt').querySelectorAll('th[data-o]').forEach(h=>h.onclick=()=>{S.po=h.dataset.o;pais()});
  const T=[...PR].sort((a,b)=>b.f-a.f).slice(0,10);mk('pc',{type:'bar',data:{labels:T.map(r=>r.p),datasets:[{label:'FOB, miles US$ (10 principales destinos)',data:T.map(r=>r.f),backgroundColor:'#1f77b4'}]},options:{indexAxis:'y',plugins:{legend:{display:true}}}})}
-const csv=(name,head,rs)=>{const x='﻿'+[head,...rs].map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('
-');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([x],{type:'text/csv;charset=utf-8'}));a.download=name;document.body.appendChild(a);a.click();a.remove()};
+const csv=(name,head,rs)=>{const x='\ufeff'+[head,...rs].map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([x],{type:'text/csv;charset=utf-8'}));a.download=name;document.body.appendChild(a);a.click();a.remove()};
 $('xd').onclick=()=>csv(`top10_exportadores_${S.yr}.csv`,['Posicion','RUC','Empresa','FOB miles US$','Peso neto t','Valor unitario US$/kg'],XR.map((r,i)=>[i+1,r.ruc,r.n,r.f.toFixed(2),r.k.toFixed(2),r.v==null?'Sin dato':r.v.toFixed(3)]));
 $('pd').onclick=()=>csv(`paises_destino_${S.yr}.csv`,['Pais','FOB miles US$','Peso neto t','Valor unitario US$/kg'],PR.map(r=>[r.p,r.f.toFixed(2),r.k.toFixed(2),r.v==null?'Sin dato':r.v.toFixed(3)]));
 $('ps').oninput=e=>{S.ps=e.target.value;pais()};$('yr').onchange=e=>{S.yr=+e.target.value;panel()};
