@@ -1,3 +1,10 @@
+<IfModule mod_headers.c>
+  # Dashboards embebidos: el navegador siempre revalida (evita versiones viejas en celular).
+  <FilesMatch "^(banano|mango)\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
